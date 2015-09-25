@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en" data-framework="angularjs">
+  <head>
+    <meta charset="utf-8">
+    <title>AngularJS VS ReactJS</title>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0-beta.0/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/react.min.js"></script>
+    <script src="https://cdn.rawgit.com/davidchang/ngReact/master/ngReact.min.js"></script>
+
+    <script type="text/javascript">
+
+      var app = angular.module( 'app', ['react'] );
+      app.test = [];
+      app.controller( 'helloController', function( $scope ) {
+        $scope.persons = [
+          { fname: 'Clark', lname: 'Kent' },
+          { fname: 'Peter', lname: 'Parker' },
+          { fname: 'Bruce', lname: 'Wayne' },
+        ];
+      } );
+
+      var HelloComponent = React.createClass( {
+        propTypes: {
+          fname: React.PropTypes.string.isRequired,
+          lname: React.PropTypes.string.isRequired
+        },
+
+        render: function() {
+          app.test.push(this.props);
+          console.log(this.props)
+          if(this.props.length){
+            console.log("here")
+            var persons = [];
+            for(var index in app.test[0]) {
+              persons.push(app.test[0][index]);
+            }
+            console.log(persons)
+            return persons.map(function(person){
+              console.log(person)
+              return React.DOM.span( null,
+                person.fname + ' ' + person.lname
+              );
+            });
+          }
+          else{
+            return React.DOM.span( null,
+              this.props.fname + ' ' + this.props.lname
+            );
+          }
+
+        }
+      } );
+
+      app.value( "HelloComponent", HelloComponent );
+
+      app.directive( 'app', function( reactDirective ) {
+        return reactDirective( Hello );
+      });
+    </script>
+
+  </head>
+  <body ng-app="app">
+    <div ng-controller="helloController">
+      <ul ng-repeat="person in persons">
+        <react-component name="HelloComponent" props="person" watch-depth="reference"/>
+      </ul>
+      <react-component name="HelloComponent" props="persons" watch-depth="reference"/>
+    </div>
+
+    <!-- <li ng-repeat="item in folder" class="dataset-select-item">
+    <a ng-click="doSomething()" class="dataset-select-link">
+        <span class="network-logo-wrap">
+            <img ng-src="/images/logos/{{item.logo}}_logo.svg" class="network-logo {{item.logo}}_logo"/>
+        </span>
+        <span class="dataset-title-text">{{item.name}}</span>
+    </a>
+
+    <a ng-show="item.title === 'dataset'" target="_self" href="#" class="dataset-select-link">
+        {{title}}
+    </a>
+    </li>  -->
+  </body>
+</html>

@@ -6,15 +6,9 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0-beta.0/angular.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/react.min.js"></script>
-    <script src="node_modules/react/dist/JSXTransformer.js"></script>
-    <script src="/js/ngReact.min.js"></script>
+    <script src="https://cdn.rawgit.com/davidchang/ngReact/master/ngReact.min.js"></script>
 
     <script type="text/javascript">
-     // app = angular.module('app', ['react']);
-     //  angular.module('app', ['react'])
-     //  .controller('helloController', function($scope) {
-     //    $scope.person = { fname: 'Clark', lname: 'Kent' };
-     //  });
 
       var app = angular.module( 'app', ['react'] );
 
@@ -41,23 +35,9 @@
 
       app.value( "HelloComponent", HelloComponent );
 
-      app.directive( 'hello', function( reactDirective ) {
+      app.directive( 'app', function( reactDirective ) {
         return reactDirective( Hello );
       });
-    </script>
-
-    <script type="text/jsx">
-      // /** @jsx React.DOM */
-      // var HelloComponent = React.createClass({
-      //   propTypes: {
-      //     fname : React.PropTypes.string.isRequired,
-      //     lname : React.PropTypes.string.isRequired
-      //   },
-      //   render: function() {
-      //     return <span>Hello {this.props.fname} {this.props.lname}</span>;
-      //   }
-      // })
-      // app.value('HelloComponent', HelloComponent);
     </script>
 
   </head>
