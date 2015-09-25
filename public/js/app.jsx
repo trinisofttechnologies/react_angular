@@ -172,8 +172,5 @@ var app = app || {};
 	}
 
 	model.subscribe(render);
-	$(document).ready(function(){
 
-		render();
-	});
 })();

@@ -6,9 +6,13 @@
  * - exposes the model to the template and provides event handlers
  */
 angular.module('todomvc')
-	.controller('TodoCtrl', function TodoCtrl($scope, $routeParams, $filter, store) {
+	.controller('TodoCtrl', function TodoCtrl($scope, $routeParams, $filter, store, react) {
 		'use strict';
-
+		$scope.items = [
+			{"name": "Nicolson Dsouza"},
+			{"name": "Liccy Fuentes"},
+			{"name": "Bhavesh Gupta"},
+		];
 		var todos = $scope.todos = store.todos;
 
 		$scope.newTodo = '';
